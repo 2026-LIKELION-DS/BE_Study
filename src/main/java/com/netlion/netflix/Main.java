@@ -11,7 +11,7 @@ public class Main {
 
             int lionCount = 0;
             while (true) {
-                System.out.println("저장할 아기사자 수를 5 이상 입력해주세요. ");
+                System.out.println("저장할 아기사자 수를 5 이상 입력해주세요.");
 
                 if (!scanner.hasNextInt()) {
                     System.out.println("[오류] 숫자만 입력할 수 있습니다.");
