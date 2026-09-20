@@ -18,9 +18,9 @@ public class Step3Main {
         lion.printInfo();
 
         // 2. default 필드: 다른 패키지에서 접근 불가하여 컴파일 에러 발생 (확인 후 주석 처리)
-        // lion.major = "소프트웨어융합학과";
+         //lion.major = "소프트웨어융합학과";
 
         // 3. private 필드: 외부 클래스에서 접근 불가하여 컴파일 에러 발생 (확인 후 주석 처리)
-        // lion.generation = 15;
+        //lion.generation = 15;
     }
 }

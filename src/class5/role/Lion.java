@@ -1,4 +1,4 @@
-package class4.role;
+package class5.role;
 
 import class4.policy.LionSubmissionPolicy;
 

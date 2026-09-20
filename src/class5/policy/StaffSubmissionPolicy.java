@@ -1,4 +1,4 @@
-package class4.policy;
+package class5.policy;
 
 public class StaffSubmissionPolicy implements SubmissionPolicy {
     @Override
