@@ -7,10 +7,6 @@ import class5.role.Lion;
 import class5.role.Role;
 import class5.role.Staff;
 
-/**
- * Mock 저장소: 미리 정의된 더미 데이터만 반환한다.
- * save()를 호출해도 실제로 저장되지 않는다 (등록해도 목록이 늘어나지 않음을 체험시키기 위함).
- */
 public class MockMemberRepository implements MemberRepository {
 
     private final List<Role> dummyMembers = new ArrayList<>();

@@ -4,13 +4,6 @@ import java.util.List;
 
 import class5.role.Role;
 
-/**
- * (Step 1) 멤버 등록/검색/조회 비즈니스 로직을 처리하는 클래스.
- *
- * Step 1에서는 Service가 Repository를 "직접" 생성해서 사용한다.
- *    (누가 이 Repository를 쓸지, Service 내부에서 스스로 결정한다 -> 강한 결합)
- *    Step 2에서 이 부분을 생성자 주입 방식으로 리팩토링한다.
- */
 public class MemberService {
 
     private final MemberRepository repository = new MemberRepository();

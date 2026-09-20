@@ -5,10 +5,6 @@ import java.util.List;
 
 import class5.role.Role;
 
-/**
- * (Step 1) 멤버 데이터를 저장·조회하는 클래스.
- * 이 단계에서는 아직 인터페이스가 아니라 하나의 구현 클래스로만 존재한다.
- */
 public class MemberRepository {
 
     private final List<Role> members = new ArrayList<>();

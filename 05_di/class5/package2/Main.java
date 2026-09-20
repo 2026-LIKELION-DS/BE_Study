@@ -7,14 +7,6 @@ import class5.role.Lion;
 import class5.role.Role;
 import class5.role.Staff;
 
-/**
- * (Step 2) DI 적용 + 구현체 교체 체험 버전.
- *
- * 의존성 조립은 오직 Main에서만 일어난다:
- *   1) 사용자가 고른 Repository 구현체를 생성하고
- *   2) 그 구현체를 MemberService 생성자에 주입한다.
- * MemberService 코드는 전혀 건드리지 않고, 여기 Main만 바꿔서 동작을 교체한다.
- */
 public class Main {
 
     public static void main(String[] args) {

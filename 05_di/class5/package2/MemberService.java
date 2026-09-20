@@ -4,15 +4,6 @@ import java.util.List;
 
 import class5.role.Role;
 
-/**
- * (Step 2) Repository "인터페이스"에만 의존하도록 리팩토링한 버전.
- *
- * - Repository를 직접 생성하지 않는다 (new MemoryMemberRepository() 같은 코드가 없다).
- * - 생성자를 통해 외부(Main)에서 구현체를 주입받는다 (의존성 주입 / DI).
- * - repository 필드는 final로 선언해, 한 번 주입되면 다른 구현체로 바뀌지 않는다.
- *
- * 이 클래스는 어떤 구현체(Memory/Mock)가 주입되는지 전혀 알 필요가 없다 (제어의 역전 / IoC).
- */
 public class MemberService {
 
     private final MemberRepository repository;

@@ -7,10 +7,6 @@ import class5.role.Lion;
 import class5.role.Role;
 import class5.role.Staff;
 
-/**
- * (Step 1) 레이어 분리 버전.
- * Main은 오직 MemberService만 사용하고, Repository는 전혀 알지 못한다.
- */
 public class Main {
 
     public static void main(String[] args) {

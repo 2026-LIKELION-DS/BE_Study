@@ -2,14 +2,6 @@ package class5.role;
 
 import class5.policy.SubmissionPolicy;
 
-/**
- * 멋쟁이사자처럼 활동 구성원을 표현하는 추상 클래스 (3~4주차와 동일한 역할).
- *
- * 필드는 모두 private으로 유지한다.
- * - name/generation/part: Repository에서 멤버를 식별·분류하는 데 쓰이므로 public getter로 노출한다.
- * - major: 상세 정보 문자열(getDetailInfo)을 만들 때만 필요하므로 protected로 두어
- *   role 패키지 내부(하위 클래스)에서만 쓰도록 제한한다.
- */
 public abstract class Role {
 
     private String name;
