@@ -1,4 +1,4 @@
-package com.netlion.netflix.week4.class4.policy;
+package com.netlion.netflix.week5.class5.policy;
 
 public class LionSubmissionPolicy implements SubmissionPolicy {
     @Override

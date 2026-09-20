@@ -1,6 +1,6 @@
-package com.netlion.netflix.week4.class4.role;
+package com.netlion.netflix.week5.class5.role;
 
-import com.netlion.netflix.week4.class4.policy.SubmissionPolicy;
+import com.netlion.netflix.week5.class5.policy.SubmissionPolicy;
 
 public abstract class Role {
     private String name;
@@ -19,16 +19,16 @@ public abstract class Role {
         return name;
     }
 
-    public String getPart() {
-        return part;
-    }
-
     protected String getMajor() {
         return major;
     }
 
     protected int getGeneration() {
         return generation;
+    }
+
+    protected String getPart() {
+        return part;
     }
 
     protected abstract SubmissionPolicy getPolicy();
@@ -39,9 +39,5 @@ public abstract class Role {
 
     public boolean canSubmit() {
         return getPolicy().canSubmit();
-    }
-
-    public String getSummary() {
-        return "[" + getRoleName() + "] " + name + " - " + generation + "기";
     }
 }

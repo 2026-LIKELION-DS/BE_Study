@@ -1,7 +1,7 @@
-package com.netlion.netflix.week4.class4.role;
+package com.netlion.netflix.week5.class5.role;
 
-import com.netlion.netflix.week4.class4.policy.LionSubmissionPolicy;
-import com.netlion.netflix.week4.class4.policy.SubmissionPolicy;
+import com.netlion.netflix.week5.class5.policy.LionSubmissionPolicy;
+import com.netlion.netflix.week5.class5.policy.SubmissionPolicy;
 
 public class Lion extends Role {
     private String studentId;
@@ -24,7 +24,7 @@ public class Lion extends Role {
     @Override
     public String getDetailInfo() {
         return "이름: " + getName() + " | 전공: " + getMajor()
-                + " | 기수: " + getGeneration() + " | 파트: " + getPart()
-                + " | 학번: " + studentId;
+                + " | 기수: " + getGeneration() + " | 파트: " + getPart() + "\n"
+                + "학번: " + studentId;
     }
 }
