@@ -1,14 +1,14 @@
-package class3.role;
+package class4.role;
 
-import class3.policy.SubmissionPolicy;
+import class4.policy.SubmissionPolicy;
 
-public abstract class Member {
+public abstract class Role {
     private String name;
     private String major;
     private int generation;
     private String part;
 
-    public Member(String name, String major, int generation, String part) {
+    public Role(String name, String major, int generation, String part) {
         this.name = name;
         this.major = major;
         this.generation = generation;
@@ -22,7 +22,7 @@ public abstract class Member {
     public abstract String getDetailInfo();
 
     public String getCommonInfo() {
-        return "\ud83d\udc64 이름: " + this.name + " | \ud83d\udea9 전공: " + this.major + " | \ud83d\udccc 기수: " + this.generation + " | \ud83d\udcbb 파트: " + this.part;
+        return "👤 이름: " + this.name + " | 🚩 전공: " + this.major + " | 📌 기수: " + this.generation + " | 💻 파트: " + this.part;
     }
 
     public boolean canSubmitAssignment() {
