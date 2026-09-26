@@ -1,7 +1,7 @@
-package com.example.pbl_springboot.role;
+package com.example.pbl_springboot.class6.role;
 
-import com.example.pbl_springboot.policy.AssignmentPolicy;
-import com.example.pbl_springboot.policy.LionAssignmentPolicy;
+import com.example.pbl_springboot.class7.policy.AssignmentPolicy;
+import com.example.pbl_springboot.class7.policy.LionAssignmentPolicy;
 
 public class Lion extends Member {
 

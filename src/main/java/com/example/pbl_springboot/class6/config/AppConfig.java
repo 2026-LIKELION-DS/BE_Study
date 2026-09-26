@@ -1,10 +1,9 @@
-package com.example.pbl_springboot.config;
+package com.example.pbl_springboot.class6.config;
 
-import com.example.pbl_springboot.MemberRepository;
-import com.example.pbl_springboot.MemberService;
-import com.example.pbl_springboot.MemoryMemberRepository;
+import com.example.pbl_springboot.class6.MemberRepository;
+import com.example.pbl_springboot.class6.MemberService;
+import com.example.pbl_springboot.class6.MemoryMemberRepository;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 //@Configuration
 public class AppConfig {

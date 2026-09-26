@@ -1,4 +1,4 @@
-package com.example.pbl_springboot.policy;
+package com.example.pbl_springboot.class7.policy;
 
 public class StaffAssignmentPolicy implements AssignmentPolicy {
 

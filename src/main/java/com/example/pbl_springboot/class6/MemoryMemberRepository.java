@@ -1,13 +1,11 @@
-package com.example.pbl_springboot;
+package com.example.pbl_springboot.class6;
 
-import com.example.pbl_springboot.role.Member;
-import com.example.pbl_springboot.MemberRepository;
+import com.example.pbl_springboot.class6.MemberRepository;
+import com.example.pbl_springboot.class6.role.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemoryMemberRepository implements MemberRepository {

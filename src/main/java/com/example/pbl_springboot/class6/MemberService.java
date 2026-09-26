@@ -1,7 +1,6 @@
-package com.example.pbl_springboot;
+package com.example.pbl_springboot.class6;
 
-import com.example.pbl_springboot.role.Member;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.pbl_springboot.class6.role.Member;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

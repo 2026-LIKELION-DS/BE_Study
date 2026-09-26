@@ -1,6 +1,6 @@
-package com.example.pbl_springboot.role;
+package com.example.pbl_springboot.class6.role;
 
-import com.example.pbl_springboot.policy.AssignmentPolicy;
+import com.example.pbl_springboot.class7.policy.AssignmentPolicy;
 
 public abstract class Member {
 

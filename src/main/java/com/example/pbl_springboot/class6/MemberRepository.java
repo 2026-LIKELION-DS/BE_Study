@@ -1,6 +1,6 @@
-package com.example.pbl_springboot;
+package com.example.pbl_springboot.class6;
 
-import com.example.pbl_springboot.role.Member;
+import com.example.pbl_springboot.class6.role.Member;
 
 import java.util.List;
 

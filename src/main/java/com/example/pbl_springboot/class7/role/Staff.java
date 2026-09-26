@@ -1,8 +1,7 @@
-package com.example.pbl_springboot.role;
+package com.example.pbl_springboot.class7.role;
 
-import com.example.pbl_springboot.policy.AssignmentPolicy;
-import com.example.pbl_springboot.policy.StaffAssignmentPolicy;
-import com.example.pbl_springboot.policy.AssignmentPolicy;
+import com.example.pbl_springboot.class7.policy.AssignmentPolicy;
+import com.example.pbl_springboot.class7.policy.StaffAssignmentPolicy;
 
 public class Staff extends Member {
 
@@ -33,5 +32,9 @@ public class Staff extends Member {
                 + " | 📌 기수: " + getGeneration()
                 + " | 💻 파트: " + getPart() + "\n"
                 + "⭐ 직책: " + position;
+    }
+
+    public String getPosition() {
+        return position;
     }
 }
