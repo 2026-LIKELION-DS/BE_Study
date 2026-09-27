@@ -4,11 +4,6 @@ import java.util.List;
 
 import com.likelion.pbl.role.Role;
 
-/**
- * (5주차와 동일) 저장소 규약을 정의하는 인터페이스.
- * Service는 구현체가 아니라 이 인터페이스에만 의존한다.
- * 7주차에서 수정(updateByName)·삭제(deleteByName) 기능을 추가했다.
- */
 public interface MemberRepository {
 
     void save(Role role);

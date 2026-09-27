@@ -2,7 +2,6 @@ package com.likelion.pbl.dto;
 
 import com.likelion.pbl.role.Staff;
 
-/** Staff 응답 DTO. */
 public record StaffResponse(
         String name,
         String major,

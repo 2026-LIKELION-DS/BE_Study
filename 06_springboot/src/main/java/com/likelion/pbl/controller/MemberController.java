@@ -22,12 +22,6 @@ import com.likelion.pbl.role.Role;
 import com.likelion.pbl.role.Staff;
 import com.likelion.pbl.service.MemberService;
 
-/**
- * 멤버 관리 CRUD API.
- * URI는 명사(members)로만 표현하고, 행위는 HTTP 메서드(POST/GET/PUT/DELETE)로 표현한다.
- * Lion과 Staff는 고유 필드가 달라서 등록/수정 API를 역할별로 나누고,
- * 조회/삭제는 이름 하나로 공통 처리한다.
- */
 @RestController
 @RequestMapping("/members")
 public class MemberController {

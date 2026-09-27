@@ -14,14 +14,6 @@ import com.likelion.pbl.role.Lion;
 import com.likelion.pbl.role.Role;
 import com.likelion.pbl.role.Staff;
 
-/**
- * (5주차와 동일한 로직) Repository 인터페이스에만 의존한다.
- *
- * @Service를 붙이면 이 클래스도 컴포넌트 스캔으로 Bean 등록된다.
- * 생성자의 @Autowired는 "이 타입의 Bean을 스프링 컨테이너에서 찾아 주입해줘"라는 뜻인데,
- * 생성자가 이거 하나뿐이라면 @Autowired를 생략해도 스프링이 자동으로 주입해준다.
- * (직접 지워보고 동일하게 동작하는지 확인해보세요 — 미션의 "@Autowired 생략 실험" 부분)
- */
 @Service
 public class MemberService {
 
