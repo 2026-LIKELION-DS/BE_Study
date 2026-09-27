@@ -13,6 +13,10 @@ public class Staff extends Role {
         this.position = position;
     }
 
+    public String getPosition() {
+        return position;
+    }
+
     @Override
     protected SubmissionPolicy getPolicy() {
         return new StaffSubmissionPolicy();

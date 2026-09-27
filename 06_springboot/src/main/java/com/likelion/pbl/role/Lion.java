@@ -13,6 +13,10 @@ public class Lion extends Role {
         this.studentId = studentId;
     }
 
+    public String getStudentId() {
+        return studentId;
+    }
+
     @Override
     protected SubmissionPolicy getPolicy() {
         return new LionSubmissionPolicy();
