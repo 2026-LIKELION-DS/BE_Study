@@ -1,8 +1,17 @@
 package com.likelion.likelionstudy.class8.domain;
 
+import com.likelion.likelionstudy.assignment.domain.Assignment;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id
@@ -10,48 +19,52 @@ public class Member {
     private Long id;
 
     private String name;
+    private String studentId;
     private String major;
     private int generation;
     private String part;
+    private String position;
 
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    private String studentId;
-    private String position;
+    @OneToMany(mappedBy = "member")
+    private List<Assignment> assignments = new ArrayList<>();
 
-    protected Member() {}
-
-    public Member(String name, String major, int generation, String part, RoleType roleType, String studentId, String position) {
+    public Member(String name, String studentId, String major, int generation, String part) {
         this.name = name;
+        this.studentId = studentId;
         this.major = major;
         this.generation = generation;
         this.part = part;
-        this.roleType = roleType;
+        this.roleType = RoleType.LION;
+    }
+
+    public Member(String name, String studentId, String major, int generation, String part, String position) {
+        this.name = name;
         this.studentId = studentId;
+        this.major = major;
+        this.generation = generation;
+        this.part = part;
         this.position = position;
+        this.roleType = RoleType.STAFF;
     }
 
-    public Long getId() { return id; }
-    public String getName() { return name; }
-    public String getMajor() { return major; }
-    public int getGeneration() { return generation; }
-    public String getPart() { return part; }
-    public RoleType getRoleType() { return roleType; }
-    public String getStudentId() { return studentId; }
-    public String getPosition() { return position; }
 
-    public void updateInfo(String major, int generation, String part) {
+    public void updateLion(String name, String studentId, String major, int generation, String part) {
+        this.name = name;
+        this.studentId = studentId;
         this.major = major;
         this.generation = generation;
         this.part = part;
     }
 
-    public void updateStudentId(String studentId) {
+    public void updateStaff(String name, String studentId, String major, int generation, String part, String position) {
+        this.name = name;
         this.studentId = studentId;
-    }
-
-    public void updatePosition(String position) {
+        this.major = major;
+        this.generation = generation;
+        this.part = part;
         this.position = position;
     }
 }

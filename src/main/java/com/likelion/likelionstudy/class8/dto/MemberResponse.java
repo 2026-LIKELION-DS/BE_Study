@@ -1,6 +1,14 @@
 package com.likelion.likelionstudy.class8.dto;
 
+
+
 import com.likelion.likelionstudy.class8.domain.Member;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
 
 public class MemberResponse {
     private Long id;
