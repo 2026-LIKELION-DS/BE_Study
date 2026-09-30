@@ -1,13 +1,14 @@
 package com.example.pbl_week6.controller;
 
+import com.example.pbl_week6.domain.Member;
 import com.example.pbl_week6.dto.*;
-import com.example.pbl_week6.role.Lion;
-import com.example.pbl_week6.role.Role;
-import com.example.pbl_week6.role.Staff;
 import com.example.pbl_week6.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/members")
@@ -19,72 +20,72 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    // 1. Lion 등록 (POST /members/lions)
+    // 1. Lion 등록
     @PostMapping("/lions")
-    public ResponseEntity<LionResponse> createLion(@RequestBody LionCreateRequest request) {
-        Lion lion = memberService.createLion(request);
-        if (lion == null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build(); // 409 Conflict
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(LionResponse.from(lion)); // 201 Created
-    }
-
-    // 2. Staff 등록 (POST /members/staffs)
-    @PostMapping("/staffs")
-    public ResponseEntity<StaffResponse> createStaff(@RequestBody StaffCreateRequest request) {
-        Staff staff = memberService.createStaff(request);
-        if (staff == null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build(); // 409 Conflict
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(StaffResponse.from(staff)); // 201 Created
-    }
-
-    // 3. 단일 멤버 조회 (GET /members/{name})
-    @GetMapping("/{name}")
-    public ResponseEntity<?> getMember(@PathVariable String name) {
-        Role member = memberService.findMember(name);
+    public ResponseEntity<MemberResponse> createLion(@RequestBody LionCreateRequest req) {
+        Member member = memberService.createLion(req);
         if (member == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404 Not Found
+            return ResponseEntity.status(HttpStatus.CONFLICT).build(); // 409
         }
-        if (member instanceof Lion) {
-            return ResponseEntity.ok(LionResponse.from((Lion) member)); // 200 OK
-        } else if (member instanceof Staff) {
-            return ResponseEntity.ok(StaffResponse.from((Staff) member)); // 200 OK
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(MemberResponse.from(member)); // 201
     }
 
-    // 4. Lion 수정 (PUT /members/lions/{name})
-    @PutMapping("/lions/{name}")
-    public ResponseEntity<LionResponse> updateLion(
-            @PathVariable String name,
-            @RequestBody LionUpdateRequest request) {
-        Lion lion = memberService.updateLion(name, request);
-        if (lion == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404 Not Found
+    // 2. Staff 등록
+    @PostMapping("/staffs")
+    public ResponseEntity<MemberResponse> createStaff(@RequestBody StaffCreateRequest req) {
+        Member member = memberService.createStaff(req);
+        if (member == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build(); // 409
         }
-        return ResponseEntity.ok(LionResponse.from(lion)); // 200 OK
+        return ResponseEntity.status(HttpStatus.CREATED).body(MemberResponse.from(member)); // 201
     }
 
-    // 5. Staff 수정 (PUT /members/staffs/{name})
-    @PutMapping("/staffs/{name}")
-    public ResponseEntity<StaffResponse> updateStaff(
-            @PathVariable String name,
-            @RequestBody StaffUpdateRequest request) {
-        Staff staff = memberService.updateStaff(name, request);
-        if (staff == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404 Not Found
-        }
-        return ResponseEntity.ok(StaffResponse.from(staff)); // 200 OK
+    // 3. 전체 멤버 조회
+    @GetMapping
+    public ResponseEntity<List<MemberResponse>> getAllMembers() {
+        List<MemberResponse> response = memberService.findAll().stream()
+                .map(MemberResponse::from)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(response);
     }
 
-    // 6. 멤버 삭제 (DELETE /members/{name})
-    @DeleteMapping("/{name}")
-    public ResponseEntity<Void> deleteMember(@PathVariable String name) {
-        boolean deleted = memberService.deleteMember(name);
+    // 4. ID로 단일 멤버 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<MemberResponse> getMember(@PathVariable Long id) {
+        Member member = memberService.findById(id);
+        if (member == null) {
+            return ResponseEntity.notFound().build(); // 404
+        }
+        return ResponseEntity.ok(MemberResponse.from(member)); // 200
+    }
+
+    // 5. Lion 수정 (ID 기반)
+    @PutMapping("/lions/{id}")
+    public ResponseEntity<MemberResponse> updateLion(@PathVariable Long id, @RequestBody LionUpdateRequest req) {
+        Member member = memberService.updateLion(id, req);
+        if (member == null) {
+            return ResponseEntity.notFound().build(); // 404
+        }
+        return ResponseEntity.ok(MemberResponse.from(member)); // 200
+    }
+
+    // 6. Staff 수정 (ID 기반)
+    @PutMapping("/staffs/{id}")
+    public ResponseEntity<MemberResponse> updateStaff(@PathVariable Long id, @RequestBody StaffUpdateRequest req) {
+        Member member = memberService.updateStaff(id, req);
+        if (member == null) {
+            return ResponseEntity.notFound().build(); // 404
+        }
+        return ResponseEntity.ok(MemberResponse.from(member)); // 200
+    }
+
+    // 7. 멤버 삭제 (ID 기반)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
+        boolean deleted = memberService.deleteMember(id);
         if (!deleted) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404 Not Found
+            return ResponseEntity.notFound().build(); // 404
         }
-        return ResponseEntity.noContent().build(); // 204 No Content
+        return ResponseEntity.noContent().build(); // 204
     }
 }
