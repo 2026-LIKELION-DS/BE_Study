@@ -1,8 +1,0 @@
-package com.example.pbl_week6.policy;
-
-public class StaffSubmissionPolicy implements SubmissionPolicy {
-    @Override
-    public boolean canSubmit() {
-        return false;
-    }
-}

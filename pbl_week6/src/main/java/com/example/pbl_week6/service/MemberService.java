@@ -1,77 +1,87 @@
 package com.example.pbl_week6.service;
 
+import com.example.pbl_week6.domain.Member;
+import com.example.pbl_week6.domain.RoleType;
 import com.example.pbl_week6.dto.LionCreateRequest;
 import com.example.pbl_week6.dto.LionUpdateRequest;
 import com.example.pbl_week6.dto.StaffCreateRequest;
 import com.example.pbl_week6.dto.StaffUpdateRequest;
 import com.example.pbl_week6.repository.MemberRepository;
-import com.example.pbl_week6.role.Lion;
-import com.example.pbl_week6.role.Role;
-import com.example.pbl_week6.role.Staff;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true) // 클래스 전체는 읽기 전용 (성능 최적화)
 public class MemberService {
+
     private final MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
-    public Role findMember(String name) {
-        return memberRepository.findByName(name);
+    public Member findById(Long id) {
+        return memberRepository.findById(id).orElse(null);
     }
 
-    public List<Role> getAllMembers() {
+    public List<Member> findAll() {
         return memberRepository.findAll();
     }
 
-    // 1. Lion 등록
-    public Lion createLion(LionCreateRequest req) {
+    @Transactional // 변경 발생 시 쓰기 트랜잭션 적용
+    public Member createLion(LionCreateRequest req) {
         if (memberRepository.existsByName(req.getName())) {
-            return null; // 중복 시 null
-        }
-        Lion lion = new Lion(req.getName(), req.getMajor(), req.getGeneration(), req.getPart(), req.getStudentId());
-        memberRepository.save(lion);
-        return lion;
-    }
-
-    // 2. Staff 등록
-    public Staff createStaff(StaffCreateRequest req) {
-        if (memberRepository.existsByName(req.getName())) {
-            return null; // 중복 시 null
-        }
-        Staff staff = new Staff(req.getName(), req.getMajor(), req.getGeneration(), req.getPart(), req.getPosition());
-        memberRepository.save(staff);
-        return staff;
-    }
-
-    // 3. Lion 수정
-    public Lion updateLion(String name, LionUpdateRequest req) {
-        Role member = memberRepository.findByName(name);
-        if (member == null) {
             return null;
         }
-        Lion updatedLion = new Lion(name, req.getMajor(), req.getGeneration(), req.getPart(), req.getStudentId());
-        memberRepository.updateByName(name, updatedLion);
-        return updatedLion;
+        Member lion = new Member(
+                req.getName(), req.getMajor(), req.getGeneration(),
+                req.getPart(), RoleType.LION, req.getStudentId(), null
+        );
+        return memberRepository.save(lion);
     }
 
-    // 4. Staff 수정
-    public Staff updateStaff(String name, StaffUpdateRequest req) {
-        Role member = memberRepository.findByName(name);
-        if (member == null) {
+    @Transactional
+    public Member createStaff(StaffCreateRequest req) {
+        if (memberRepository.existsByName(req.getName())) {
             return null;
         }
-        Staff updatedStaff = new Staff(name, req.getMajor(), req.getGeneration(), req.getPart(), req.getPosition());
-        memberRepository.updateByName(name, updatedStaff);
-        return updatedStaff;
+        Member staff = new Member(
+                req.getName(), req.getMajor(), req.getGeneration(),
+                req.getPart(), RoleType.STAFF, null, req.getPosition()
+        );
+        return memberRepository.save(staff);
     }
 
-    // 5. 멤버 삭제
-    public boolean deleteMember(String name) {
-        return memberRepository.deleteByName(name);
+    @Transactional
+    public Member updateLion(Long id, LionUpdateRequest req) {
+        Member member = memberRepository.findById(id).orElse(null);
+        if (member == null || member.getRoleType() != RoleType.LION) {
+            return null;
+        }
+        member.updateInfo(req.getMajor(), req.getGeneration(), req.getPart());
+        member.updateStudentId(req.getStudentId());
+        return memberRepository.save(member);
+    }
+
+    @Transactional
+    public Member updateStaff(Long id, StaffUpdateRequest req) {
+        Member member = memberRepository.findById(id).orElse(null);
+        if (member == null || member.getRoleType() != RoleType.STAFF) {
+            return null;
+        }
+        member.updateInfo(req.getMajor(), req.getGeneration(), req.getPart());
+        member.updatePosition(req.getPosition());
+        return memberRepository.save(member);
+    }
+
+    @Transactional
+    public boolean deleteMember(Long id) {
+        if (!memberRepository.existsById(id)) {
+            return false;
+        }
+        memberRepository.deleteById(id);
+        return true;
     }
 }
