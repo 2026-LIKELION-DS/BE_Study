@@ -1,4 +1,4 @@
-package com.netlion.pbl.dto;
+package com.netlion.pbl.member.dto;
 
 public class StaffCreateRequest {
     private String name;

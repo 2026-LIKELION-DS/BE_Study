@@ -1,19 +1,11 @@
-package com.netlion.pbl.repository;
+package com.netlion.pbl.member.repository;
 
-import com.netlion.pbl.domain.role.Role;
+import com.netlion.pbl.member.domain.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface MemberRepository {
-    void save(Role role);
-
-    Role findByName(String name);
-
-    List<Role> findAll();
+public interface MemberRepository extends JpaRepository<Member, Long> {
 
     boolean existsByName(String name);
 
-    void updateByName(String name, Role member);
-
-    boolean deleteByName(String name);
+    Member findByName(String name);
 }
