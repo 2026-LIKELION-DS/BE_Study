@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true) // 클래스 전체는 읽기 전용 (성능 최적화)
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -22,22 +22,18 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    // 단건 조회 (ID 기반)
-    @Transactional(readOnly = true)
     public Member findById(Long id) {
         return memberRepository.findById(id).orElse(null);
     }
 
-    // 전체 조회
-    @Transactional(readOnly = true)
     public List<Member> findAll() {
         return memberRepository.findAll();
     }
 
-    // Lion 등록
+    @Transactional // 변경 발생 시 쓰기 트랜잭션 적용
     public Member createLion(LionCreateRequest req) {
         if (memberRepository.existsByName(req.getName())) {
-            return null; // 이름 중복 시 null
+            return null;
         }
         Member lion = new Member(
                 req.getName(), req.getMajor(), req.getGeneration(),
@@ -46,10 +42,10 @@ public class MemberService {
         return memberRepository.save(lion);
     }
 
-    // Staff 등록
+    @Transactional
     public Member createStaff(StaffCreateRequest req) {
         if (memberRepository.existsByName(req.getName())) {
-            return null; // 이름 중복 시 null
+            return null;
         }
         Member staff = new Member(
                 req.getName(), req.getMajor(), req.getGeneration(),
@@ -58,7 +54,7 @@ public class MemberService {
         return memberRepository.save(staff);
     }
 
-    // Lion 수정 (ID 기반)
+    @Transactional
     public Member updateLion(Long id, LionUpdateRequest req) {
         Member member = memberRepository.findById(id).orElse(null);
         if (member == null || member.getRoleType() != RoleType.LION) {
@@ -69,7 +65,7 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    // Staff 수정 (ID 기반)
+    @Transactional
     public Member updateStaff(Long id, StaffUpdateRequest req) {
         Member member = memberRepository.findById(id).orElse(null);
         if (member == null || member.getRoleType() != RoleType.STAFF) {
@@ -80,7 +76,7 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    // 삭제 (ID 기반)
+    @Transactional
     public boolean deleteMember(Long id) {
         if (!memberRepository.existsById(id)) {
             return false;

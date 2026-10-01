@@ -1,6 +1,9 @@
 package com.example.pbl_week6.domain;
 
+import com.example.pbl_week6.assignment.domain.Assignment;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -17,12 +20,14 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    private String studentId; // Lion일 때만 값 존재, Staff는 null
-    private String position;  // Staff일 때만 값 존재, Lion은 null
+    private String studentId;
+    private String position;
 
-    protected Member() {} // JPA 필수 기본 생성자
+    @OneToMany(mappedBy = "member")
+    private List<Assignment> assignments = new ArrayList<>();
 
-    // 전체 생성자
+    protected Member() {}
+
     public Member(String name, String major, int generation, String part, RoleType roleType, String studentId, String position) {
         this.name = name;
         this.major = major;
@@ -33,7 +38,6 @@ public class Member {
         this.position = position;
     }
 
-    // 수정 메서드
     public void updateInfo(String major, int generation, String part) {
         this.major = major;
         this.generation = generation;
@@ -57,4 +61,5 @@ public class Member {
     public RoleType getRoleType() { return roleType; }
     public String getStudentId() { return studentId; }
     public String getPosition() { return position; }
+    public List<Assignment> getAssignments() { return assignments; }
 }
