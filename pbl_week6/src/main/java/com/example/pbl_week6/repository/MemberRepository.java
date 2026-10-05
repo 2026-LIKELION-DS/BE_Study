@@ -1,13 +1,13 @@
 package com.example.pbl_week6.repository;
 
-import com.example.pbl_week6.role.Role;
-import java.util.List;
+import com.example.pbl_week6.domain.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface MemberRepository {
-    void save(Role role);
-    Role findByName(String name);
-    List<Role> findAll();
+import java.util.Optional;
+
+@Repository
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    Optional<Member> findByName(String name);
     boolean existsByName(String name);
-    void updateByName(String name, Role member);
-    boolean deleteByName(String name);
 }
